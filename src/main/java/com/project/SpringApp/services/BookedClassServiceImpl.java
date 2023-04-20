@@ -1,12 +1,14 @@
 package com.project.SpringApp.services;
 
 import com.project.SpringApp.entities.BookedClass;
+import com.project.SpringApp.entities.User;
 import com.project.SpringApp.repositories.BookedClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class BookedClassServiceImpl implements BookedClassService{
     @Autowired
     private BookedClassRepository bookedClassRepository;
@@ -33,6 +35,16 @@ public class BookedClassServiceImpl implements BookedClassService{
     @Override
     public void deleteBookedClassById(Long id) {
         bookedClassRepository.deleteById(id);
-
     }
+
+    @Override
+    public List<BookedClass> findByStudent(User student) {
+        return bookedClassRepository.findByStudent(student);
+    }
+
+    @Override
+    public List<BookedClass> findByTeacher(User teacher) {
+        return bookedClassRepository.findByTeacher(teacher);
+    }
+
 }

@@ -2,7 +2,9 @@ package com.project.SpringApp.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "booked_class")
@@ -14,15 +16,17 @@ public class BookedClass {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    private Student student;
+    private User student;
 
     @ManyToOne
     @JoinColumn(name = "teacher_id")
-    private Teacher teacher;
+    private User teacher;
 
-    private LocalDateTime startTime;
+    @Column(name = "class_date")
+    private LocalDate classDate;
 
-    private LocalDateTime endTime;
+    @Column(name = "class_time")
+    private LocalTime classTime;
 
     public Long getId() {
         return id;
@@ -32,35 +36,36 @@ public class BookedClass {
         this.id = id;
     }
 
-    public Student getStudent() {
+    public User getStudent() {
         return student;
     }
 
-    public void setStudent(Student student) {
+    public void setStudent(User student) {
         this.student = student;
     }
 
-    public Teacher getTeacher() {
+    public User getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(Teacher teacher) {
+    public void setTeacher(User teacher) {
         this.teacher = teacher;
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
+    public LocalDate getClassDate() {
+        return classDate;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
+    public void setClassDate(LocalDate classDate) {
+        this.classDate = classDate;
     }
 
-    public LocalDateTime getEndTime() {
-        return endTime;
+    public LocalTime getClassTime() {
+        return classTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
+    public void setClassTime(LocalTime classTime) {
+        this.classTime = classTime;
     }
+
 }

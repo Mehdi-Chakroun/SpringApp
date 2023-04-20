@@ -74,8 +74,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.32</version>
 		</dependency>
-
-
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+			<systemPath>${project.basedir}/lib/javax.servlet.jar</systemPath>
+			<scope>system</scope>
+		</dependency>
 
 	</dependencies>
 
@@ -87,7 +91,7 @@
 				<configuration>
 					<excludes>
 						<exclude>
-							<groupId>org.projectlombok</groupId>
+							<groupId>org.project-lombok</groupId>
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>

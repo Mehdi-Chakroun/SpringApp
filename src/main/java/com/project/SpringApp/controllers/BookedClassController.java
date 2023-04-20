@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/booked-classes")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BookedClassController {
 
     @Autowired
