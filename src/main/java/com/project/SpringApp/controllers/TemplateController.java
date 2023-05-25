@@ -2,10 +2,8 @@ package com.project.SpringApp.controllers;
 
 import com.project.SpringApp.entities.BookedClass;
 import com.project.SpringApp.entities.User;
-import com.project.SpringApp.services.BookedClassService;
 import com.project.SpringApp.services.BookedClassServiceImpl;
 import com.project.SpringApp.services.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Book;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalTime;
