@@ -21,6 +21,26 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    public String getUserPhoto() {
+        return userPhoto;
+    }
+
+    public void setUserPhoto(String userPhoto) {
+        this.userPhoto = userPhoto;
+    }
+
+    @Column(name = "user_photo")
+    private String userPhoto = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdepositphotos.com%2Fvector-images%2Fprofile-placeholder.html&psig=AOvVaw1k9VyHz2R5wSuqDcHFez4L&ust=1685041224285000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKCP1O_Rjv8CFQAAAAAdAAAAABAE";
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    private String confirmPassword;
     @Column(name = "role")
     private String role;
 
@@ -29,6 +49,17 @@ public class User {
 
     @Column(name = "address")
     private String address;
+
+    public boolean isAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
+    }
+
+    @Column(name = "availability")
+    private boolean availability = false;
 
     public Long getId() {
         return id;
@@ -67,7 +98,7 @@ public class User {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = lastName.toUpperCase();
     }
 
     public String getRole() {

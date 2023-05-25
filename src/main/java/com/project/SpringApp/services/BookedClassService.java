@@ -14,5 +14,7 @@ public interface BookedClassService {
     void deleteBookedClassById(Long id);
     List<BookedClass> findByStudent(User student);
     List<BookedClass> findByTeacher(User teacher);
+    List<BookedClass> getAcceptedBookedClasses(Long id);
+    List<BookedClass> getPendingBookedClasses(Long id);
 
 }

@@ -28,6 +28,28 @@ public class BookedClass {
     @Column(name = "class_time")
     private LocalTime classTime;
 
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    @Column(name = "accepted")
+    private boolean accepted = false;
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    @Column(name = "subject")
+    private String subject;
+
     public Long getId() {
         return id;
     }

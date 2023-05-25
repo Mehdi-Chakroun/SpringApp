@@ -1,0 +1,23 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.sidebar ul.nav-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 20px;
+}
+.sidebar ul.nav-list li {
+    margin-bottom: 10px;
+}
+.sidebar ul.nav-list li a {
+    color: #333;
+}
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
