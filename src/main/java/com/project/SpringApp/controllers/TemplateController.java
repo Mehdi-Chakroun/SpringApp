@@ -31,6 +31,10 @@ public class TemplateController {
         return "register"; // Return the name of the register form template
     }
 
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login"; // Return the name of your login template (e.g., "login.html")
+    }
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
@@ -42,6 +46,7 @@ public class TemplateController {
             // If there are validation errors, return back to the registration form
             return "register";
         } else {
+            if (user.getUserPhoto().isEmpty()) user.setUserPhoto("https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png");
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setPassword(passwordEncoder.encode(user.getConfirmPassword()));
             userService.saveUser(user);
@@ -90,19 +95,7 @@ public class TemplateController {
         model.addAttribute("accepted", accepted);
         return "student-dashboard"; // Return the template name for the student dashboard
     }
-    @PostMapping("/bookClass")
-    public String bookClass(@RequestParam("teacherId") Long teacherId, @RequestParam("classDate") LocalDate classDate, @RequestParam("classTime") LocalTime classTime, Principal principal){
-        User teacher = userService.findUserById(teacherId).orElse(null);
-        User student = userService.findByUsername(principal.getName()).orElse(null);
-        BookedClass bookedClass = new BookedClass();
-        bookedClass.setTeacher(teacher);
-        bookedClass.setClassDate(classDate);
-        bookedClass.setClassTime(classTime);
-        bookedClass.setSubject(teacher.getSubject());
-        bookedClass.setStudent(student);
-        bookedClassService.saveBookedClass(bookedClass);
-        return "redirect:/student/dashboard";
-    }
+
     @PostMapping("/classAction")
     public String classAction(@RequestParam("requestId") Long id,
                               @RequestParam(value = "acceptBtn", required = false) String acceptBtn,
@@ -118,6 +111,37 @@ public class TemplateController {
         if(user.getRole().equals("TEACHER")) return "redirect:/teacher/dashboard";
         else return "redirect:/student/dashboard";
     }
+    @GetMapping("/profile")
+    public String showProfile(Model model, Principal principal) {
+        User user = userService.findByUsername(principal.getName()).orElse(null);
+        model.addAttribute("user", user);
+        String dashboardURL =  "/" + user.getRole().toLowerCase() + "/dashboard";
+        model.addAttribute("dashboardURL", dashboardURL);
+        return "profile";
+    }
+    @PostMapping("/bookClass")
+    public String bookClass(@RequestParam("teacherId") Long teacherId, @RequestParam("classDate") LocalDate classDate, @RequestParam("classTime") LocalTime classTime, Principal principal){
+        User teacher = userService.findUserById(teacherId).orElse(null);
+        User student = userService.findByUsername(principal.getName()).orElse(null);
+        BookedClass bookedClass = new BookedClass();
+        bookedClass.setTeacher(teacher);
+        bookedClass.setClassDate(classDate);
+        bookedClass.setClassTime(classTime);
+        bookedClass.setSubject(teacher.getSubject());
+        bookedClass.setStudent(student);
+        bookedClassService.saveBookedClass(bookedClass);
+        return "redirect:/student/dashboard";
+    }
+    @PostMapping("/counterClass")
+    public String counterClass(@RequestParam("classID") Long classID, @RequestParam("counterDate") LocalDate counterDate, @RequestParam("counterTime") LocalTime counterTime, Principal principal){
+        BookedClass bookedClass = bookedClassService.getBookedClassById(classID).orElse(null);
+        bookedClass.setClassDate(counterDate);
+        bookedClass.setClassTime(counterTime);
+        bookedClass.setCountered(true);
+        bookedClassService.saveBookedClass(bookedClass);
+        return "redirect:/teacher/dashboard";
+    }
+
     @GetMapping("/access-denied")
     public String showAccessDenied() {
         return "access-denied";

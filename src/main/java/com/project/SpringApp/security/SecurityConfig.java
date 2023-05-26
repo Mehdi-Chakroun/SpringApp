@@ -26,11 +26,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests()
-                .requestMatchers("/register").permitAll() // Allow access to the register page without authentication
+                .requestMatchers("/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/", true) // Redirect to the default URL ("/") and allow the destination URL to be overridden based on role
+                .loginPage("/login").permitAll()
+                .defaultSuccessUrl("/", true)
                 .successHandler((request, response, authentication) -> {
                     String targetUrl = determineTargetUrl(authentication);
                     response.sendRedirect(targetUrl);

@@ -38,6 +38,17 @@ public class BookedClass {
     @Column(name = "accepted")
     private boolean accepted = false;
 
+    public boolean isCountered() {
+        return countered;
+    }
+
+    public void setCountered(boolean countered) {
+        this.countered = countered;
+    }
+
+    @Column(name = "countered")
+    private boolean countered = false;
+
     public String getSubject() {
         return subject;
     }

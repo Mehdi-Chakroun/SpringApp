@@ -29,6 +29,7 @@
                         <span th:text="${student.username}"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" th:href="@{/profile}">Profile</a>
                         <a class="dropdown-item" th:href="@{/logout}">Logout</a>
                     </div>
                 </li>
@@ -107,7 +108,7 @@
                                 <td>
                                     <form th:action="@{/deleteClass}" method="post">
                                         <input type="hidden" name="requestId" th:value="${bookedClass.id}" id="requestId">
-                                        <button class="btn btn-danger" type="submit"><span class="fas fa-trash fa-solid mr-2"></span>Cancel</button>
+                                        <button class="btn btn-danger" type="submit"><span class="fas fa-times fa-solid"></span></button>
                                     </form>
                                 </td>
                             </tr>
@@ -138,9 +139,10 @@
                                 <td th:text="${request.classTime}"></td>
                                 <td th:text="${request.subject}"></td>
                                 <td>
-                                    <form th:action="@{/deleteClass}" method="post">
+                                    <form th:action="@{/classAction}" method="post">
                                         <input type="hidden" name="requestId" th:value="${request.id}" id="requestId">
-                                        <button class="btn btn-danger" type="submit"><span class="fas fa-trash fa-solid mr-2"></span>Cancel</button>
+                                        <button th:if="${request.countered}" class="btn btn-success" type="submit" name="acceptBtn"><span class="fas fa-check fa-solid"></span></button>
+                                        <button class="btn btn-danger" type="submit" name="cancelBtn"><span class="fas fa-times fa-solid"></span></button>
                                     </form>
                                 </td>
                             </tr>
@@ -195,11 +197,6 @@
         var teacherId = button.data('teacher-id'); // Get the teacher's ID from the button
         $('#teacherId').val(teacherId); // Set the teacher's ID in the hidden input field
     });
-
-    function submitBooking() {
-        var form = document.getElementById('bookingForm');
-        form.submit();
-    }
 </script>
 </body>
 </html>

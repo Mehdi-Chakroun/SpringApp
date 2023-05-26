@@ -30,7 +30,7 @@ public class User {
     }
 
     @Column(name = "user_photo")
-    private String userPhoto = "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
+    private String userPhoto;
 
     public String getConfirmPassword() {
         return confirmPassword;
