@@ -103,12 +103,20 @@ public class TemplateController {
         bookedClassService.saveBookedClass(bookedClass);
         return "redirect:/student/dashboard";
     }
-    @PostMapping("deleteClass")
-    public String deleteRequest(@RequestParam("requestId") Long id, Principal principal){
-        bookedClassService.deleteBookedClassById(id);
+    @PostMapping("/classAction")
+    public String classAction(@RequestParam("requestId") Long id,
+                              @RequestParam(value = "acceptBtn", required = false) String acceptBtn,
+                              @RequestParam(value = "cancelBtn", required = false) String cancelBtn,
+                              Principal principal){
+        if (cancelBtn != null) bookedClassService.deleteBookedClassById(id);
+        else if (acceptBtn != null) {
+            BookedClass bc = bookedClassService.getBookedClassById(id).orElse(null);
+            bc.setAccepted(true);
+            bookedClassService.saveBookedClass(bc);
+        }
         User user = userService.findByUsername(principal.getName()).orElse(null);
-        if(user.getRole() == "TEACHER") return "redirect:/teacher/dashboard";
-        return "redirect:/student/dashboard";
+        if(user.getRole().equals("TEACHER")) return "redirect:/teacher/dashboard";
+        else return "redirect:/student/dashboard";
     }
     @GetMapping("/access-denied")
     public String showAccessDenied() {

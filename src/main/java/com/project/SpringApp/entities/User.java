@@ -30,7 +30,7 @@ public class User {
     }
 
     @Column(name = "user_photo")
-    private String userPhoto = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdepositphotos.com%2Fvector-images%2Fprofile-placeholder.html&psig=AOvVaw1k9VyHz2R5wSuqDcHFez4L&ust=1685041224285000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKCP1O_Rjv8CFQAAAAAdAAAAABAE";
+    private String userPhoto = "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
 
     public String getConfirmPassword() {
         return confirmPassword;

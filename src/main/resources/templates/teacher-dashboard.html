@@ -30,7 +30,7 @@
 </nav>
 <div class="container-fluid mt-5">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="list-group">
                 <a href="#classes-content" class="list-group-item list-group-item-action active" data-toggle="tab">
                     <span class="fa-solid fa-check mr-2" style="color: #00ff06;"></span>
@@ -49,7 +49,7 @@
 
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="tab-content">
                 <div id="classes-content" class="tab-pane fade show active">
                     <h1>Booked Classes</h1>
@@ -72,9 +72,12 @@
                             <td th:text="${bookedClass.classTime}"></td>
                             <td th:text="${bookedClass.subject}"></td>
                             <td>
-                                <form th:action="@{/deleteClass}" method="post">
+                                <div class="d-flex">
+
+                                </div>
+                                <form th:action="@{/classAction}" method="post">
                                     <input type="hidden" name="requestId" th:value="${bookedClass.id}" id="requestId">
-                                    <button class="btn btn-danger" type="submit"><span class="fas fa-trash fa-solid mr-2"></span>Cancel</button>
+                                    <button class="btn btn-danger" type="submit" name="cancelBtn"><span class="fas fa-trash fa-solid"></span>Cancel</button>
                                 </form>
                             </td>
                         </tr>
@@ -102,9 +105,10 @@
                             <td th:text="${request.classTime}"></td>
                             <td th:text="${request.subject}"></td>
                             <td>
-                                <form th:action="@{/deleteClass}" method="post">
+                                <form th:action="@{/classAction}" method="post">
                                     <input type="hidden" name="requestId" th:value="${request.id}" id="requestId">
-                                    <button class="btn btn-danger" type="submit"><span class="fas fa-trash fa-solid mr-2"></span>Cancel</button>
+                                    <button class="btn btn-success" type="submit" name="acceptBtn"><span class="fas fa-check fa-solid"></span></button>
+                                    <button class="btn btn-danger" type="submit"><span class="fas fa-trash fa-solid"></span></button>
                                 </form>
                             </td>
                         </tr>
